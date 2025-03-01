@@ -1,0 +1,173 @@
+.rok-drawer-overlay {
+  display: flex;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.3
+  ); /* Slightly lighter for better blur effect */
+  backdrop-filter: blur(2px); /* Adjust the blur intensity */
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+/* Show the overlay when open */
+.rok-drawer-overlay.open {
+  visibility: visible;
+  opacity: 1;
+}
+
+.rok-drawer-container {
+  position: fixed;
+  width: 100%;
+  max-width: 400px;
+  background-color: #fff;
+  box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transition: transform 0.3s ease-in-out;
+}
+
+  
+/* Position variants */
+.rok-drawer-container[data-position="left"] {
+  left: 0;
+  top: 0;
+  bottom: 0;
+  transform: translateX(-100%);
+  border-radius: 0 16px 16px 0;
+}
+
+.rok-drawer-container[data-position="right"] {
+  right: 0;
+  top: 0;
+  bottom: 0;
+  transform: translateX(100%);
+  border-radius: 16px 0 0 16px;
+
+}
+
+.rok-drawer-container[data-position="top"] {
+  top: 0;
+  min-width: 100%;
+  height: 100%;
+  max-height: 260px;
+  transform: translateY(-100%);
+  border-radius: 0 0 16px 16px;
+}
+
+.rok-drawer-container[data-position="bottom"] {
+  bottom: 0;
+  min-width: 100%;
+  height: 100%;
+  max-height: 260px;
+  transform: translateY(100%);
+  border-radius:16px 16px 0 0 ;
+}
+
+.rok-drawer-container[data-position="center"] {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    max-width: 90lvw;
+    height: auto;
+    max-height: 90lvh;
+    border-radius: 16px;
+    background: white;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+    transform: translate(-50%, -50%) scale(0.8); /* Starts smaller and slightly off-center */
+    opacity: 0;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
+  
+  /* Show the drawer when open */
+  .rok-drawer-container[data-position="center"].open {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  
+.rok-drawer-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 2.23rem;
+  height: 2.23rem;
+  font-size: 1rem;
+  border-radius: 100%;
+  background-color: rgba(17, 23, 29, 0.6);
+  color: #fff;
+  z-index: 4;
+  cursor: pointer;
+  border: none;
+}
+
+.rok-drawer-container[data-position="left"] .rok-drawer-close {
+  right: calc(-2.23rem + -0.5rem);
+  top: 0.5rem;
+}
+
+.rok-drawer-container[data-position="right"] .rok-drawer-close {
+  left: calc(-2.23rem + -0.5rem);
+  top: 0.5rem;
+}
+
+.rok-drawer-container[data-position="top"] .rok-drawer-close {
+  right: 0.5rem;
+  bottom: calc(-2.23rem + -0.5rem);
+}
+
+.rok-drawer-container[data-position="bottom"] .rok-drawer-close {
+  right: 0.5rem;
+  top: calc(-2.23rem + -0.5rem);
+}
+
+.rok-drawer-container[data-position="center"] .rok-drawer-close {
+  right: 0.5rem;
+  top: calc(-2.23rem + -0.5rem);
+}
+
+/* Show drawer when open */
+.rok-drawer-container.open {
+  transform: translate(0, 0);
+}
+
+@media (max-width: 768px) {
+  .rok-drawer-close {
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.5rem;
+  }
+
+  .rok-drawer-container[data-position="left"] {
+    max-width: calc(100% - (2.23rem + 0.5rem + 1rem));
+  }
+
+  .rok-drawer-container[data-position="left"] .rok-drawer-close {
+    right: calc(-2.23rem + -1rem);
+    top: 0.5rem;
+  }
+
+  .rok-drawer-container[data-position="right"] {
+    max-width: calc(100% - (2.23rem + 0.5rem + 1rem));
+  }
+
+  .rok-drawer-container[data-position="right"] .rok-drawer-close {
+    left: calc(-2.23rem + -1rem);
+    top: 0.5rem;
+  }
+
+  .rok-drawer-container[data-position="top"] .rok-drawer-close {
+    bottom: calc(-3rem + -0.5rem);
+  }
+
+  .rok-drawer-container[data-position="bottom"] .rok-drawer-close {
+    top: calc(-3rem + -0.5rem);
+  }
+}
